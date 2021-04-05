@@ -44,16 +44,17 @@ public class AddressBook {
     }
 
     public static void main(String[] args) {
-        System.out.println(" WELCOME TO THE ADDRESS BOOK PROGRAM ");
-        ArrayList<AddressBook> list = new ArrayList<AddressBook>();
+        System.out.println("----WELCOME TO THE ADDRESS BOOK PROGRAM-----");
+        System.out.println("PLEASE ENTER YOUR DETAILS IN THE ADDRESS BOOK");
+        ArrayList<AddressBook> list = new ArrayList<>();
         System.out.println("How many contacts you want to add: ");
         Scanner userinput=new Scanner(System.in);
         int user=userinput.nextInt();
         for(int i=0;i<user;i++)
         {
-            AddressBook person = new AddressBook();
-            person.getUserDetails();
-            list.add(person);
+            AddressBook person = new AddressBook();//creating object
+            person.getUserDetails();//calling the method using object
+            list.add(person);//adding the details to list using object
             System.out.println(list.toString());
         }
         //printing the contacts in the list
