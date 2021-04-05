@@ -1,7 +1,6 @@
 package com.addressBook.console;
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 public class AddressBook {
     String firstname;
@@ -9,18 +8,18 @@ public class AddressBook {
     String address;
     String city;
     String state;
-    long phonenumber;
+    long phoneNumber;
     String email;
     long zipcode;
 
     public void getUserDetails()//Method to get user details
     {
         System.out.println("Enter your First Name: ");
-        Scanner firstvalue = new Scanner(System.in);
-        this.firstname = firstvalue.nextLine();
+        Scanner firstName = new Scanner(System.in);
+        this.firstname = firstName.nextLine();
         System.out.println("Enter your Last Name: ");
-        Scanner lastvalue = new Scanner(System.in);
-        this.lastname = lastvalue.nextLine();
+        Scanner lastName = new Scanner(System.in);
+        this.lastname = lastName.nextLine();
         System.out.println("Enter your Address : ");
         Scanner Address = new Scanner(System.in);
         this.address = Address.nextLine();
@@ -32,7 +31,7 @@ public class AddressBook {
         this.state = State.nextLine();
         System.out.println("Enter your Phone Number : ");
         Scanner phone = new Scanner(System.in);
-        this.phonenumber = phone.nextLong();
+        this.phoneNumber = phone.nextLong();
         System.out.println("Enter your Email Id : ");
         Scanner Email = new Scanner(System.in);
         this.email = Email.nextLine();
@@ -42,56 +41,47 @@ public class AddressBook {
     }
 
     public String getName() {
-        this.firstname = firstname;
         return this.firstname;
     }
 
     public void editDetails() {
         Scanner userChoice = new Scanner(System.in);
         System.out.println("WHICH DETAILS YOU WANT TO CHANGE?");
-        System.out.println("PRESS 1 FIRST NAME\nPRESS 2 LAST NAME\nPRESS 3 ADDRESS\nPRESS 4 CITY\nPRESS 5 STATE\nPRESS 6 PHONENUMBER\nPRESS 7 EMAIL\nPRESS 8 ZIPCODE\nIF DONE PRESS 9 EXIT");
-        Scanner editdetailsinput = new Scanner(System.in);
-        int Choice = editdetailsinput.nextInt();
+        System.out.println("PRESS 1 FIRST NAME\nPRESS 2 LAST NAME\nPRESS 3 ADDRESS\nPRESS 4 CITY\nPRESS 5 STATE\nPRESS 6 PHONE NUMBER\nPRESS 7 EMAIL\nPRESS 8 ZIPCODE\nIF DONE PRESS 9 EXIT");
+        Scanner detailsinput = new Scanner(System.in);
+        int Choice =detailsinput.nextInt();
         switch (Choice) {
             case 1:
                 System.out.println("EDIT THE FIRST NAME TO: ");
-                String edit_fname = userChoice.nextLine();
-                this.firstname = edit_fname;
+                this.firstname = userChoice.nextLine();
                 break;
             case 2:
                 System.out.println("EDIT THE LAST NAME TO: ");
-                String edit_lname = userChoice.nextLine();
-                this.lastname = edit_lname;
+                this.lastname = userChoice.nextLine();
                 break;
             case 3:
                 System.out.println("EDIT THE ADDRESS TO: ");
-                String edit_address = userChoice.nextLine();
-                this.address = edit_address;
+                this.address = userChoice.nextLine();
                 break;
             case 4:
                 System.out.println("EDIT THE CITY TO: ");
-                String edit_city = userChoice.nextLine();
-                this.city = edit_city;
+                this.city = userChoice.nextLine();
                 break;
             case 5:
                 System.out.println("EDIT THE STATE TO: ");
-                String edit_state = userChoice.nextLine();
-                this.state = edit_state;
+                this.state = userChoice.nextLine();
                 break;
             case 6:
                 System.out.println("EDIT THE PHONE NUMBER TO: ");
-                long edit_num = userChoice.nextLong();
-                this.phonenumber = edit_num;
+                this.phoneNumber = userChoice.nextLong();
                 break;
             case 7:
                 System.out.println("EDIT THE EMAIL TO:");
-                String edit_email = userChoice.nextLine();
-                this.email = edit_email;
+                this.email = userChoice.nextLine();
                 break;
             case 8:
                 System.out.println("EDIT THE ZIP CODE TO:");
-                long edit_zip = userChoice.nextLong();
-                this.zipcode = edit_zip;
+                this.zipcode = userChoice.nextLong();
                 break;
             default:
                 break;
@@ -99,7 +89,7 @@ public class AddressBook {
     }
 
     public String toString() {
-        return ("\nFIRST NAME: " + firstname + "\nLAST NAME: " + lastname + "\nADDRESS: " + address + "\nCITY: " + city + "\nSTATE: " + state + "\nPHONE NUMBER: " + phonenumber + "\nEMAIL ID: " + email + "\nZIP CODE:" + zipcode);
+        return ("\nFIRST NAME: " + firstname + "\nLAST NAME: " + lastname + "\nADDRESS: " + address + "\nCITY: " + city + "\nSTATE: " + state + "\nPHONE NUMBER: " + phoneNumber + "\nEMAIL ID: " + email + "\nZIP CODE:" + zipcode);
     }
 
     public static void addressBookOperation() {
@@ -110,35 +100,63 @@ public class AddressBook {
         Scanner userinput = new Scanner(System.in);
         int user = userinput.nextInt();
         for (int i = 0; i < user; i++) {
-            AddressBook person = new AddressBook();//creating object
+           AddressBook person = new AddressBook();//creating object
             person.getUserDetails();//calling the method using object
             list.add(person);//adding the details to list using object
-            System.out.println(list.toString());
         }
-        System.out.println("IF YOU WANT TO EDIT DETAILS OF THE CONTACT: PRESS 1\nPRESS 2 FOR EXIT ");
-        Scanner det = new Scanner(System.in);
-        int details = det.nextInt();
-        switch (details) {
-            case 1:
-                System.out.println("--ENTER THE FIRST NAME OF THE CONTACT FOR EDITING--");
-                Scanner edit = new Scanner(System.in);
-                String change = edit.nextLine();
-                for (AddressBook i : list) {
-                    if (i.getName().equals(change)) {
-                        i.editDetails();
-                    }
-                    break;
+        System.out.println("\nContacts in the Address Book are: ");
+        for (AddressBook addressBook : list) {
+            System.out.println(addressBook);
+        }
+
+
+        System.out.println("IF YOU WANT TO EDIT DETAILS OF THE CONTACT: PRESS 1 FOR EDITING \nPRESS 2 FOR EXIT");
+        Scanner input = new Scanner(System.in);
+        int in=input.nextInt();
+        switch(in)
+        {
+            case 1:System.out.println(list.toString());
+                    System.out.println("--ENTER THE FIRST NAME OF THE CONTACT FOR EDITING--");
+                    Scanner str=new Scanner(System.in);
+                for (AddressBook addressBook : list) {
+                    System.out.println(addressBook.firstname);
                 }
-                System.out.println(list.toString());
-                break;
+                    String usingFirstname=str.nextLine();
+                            for (AddressBook i:list) {
+                                if (i.getName().equals(usingFirstname)) {
+                                    i.editDetails();
+                                    System.out.println(list.toString());
+                                }
+                                break;
+                            }
+                             break;
             default:
                 break;
         }
+        System.out.println("IF YOU WANT TO EDIT DETAILS OF THE CONTACT: PRESS 1 FOR DELETING \nPRESS 2 FOR EXIT");
+        Scanner input2 = new Scanner(System.in);
+        int in2=input2.nextInt();
+        switch (in2) {
+            case 1 -> {
+                System.out.println(list.toString());
+                for (AddressBook addressBook : list) {
+                    System.out.println(addressBook.firstname);
+                }
+                System.out.println("--ENTER THE FIRST NAME OF THE CONTACT FOR DELETING--");
+                Scanner edit1 = new Scanner(System.in);
+                String store = edit1.nextLine();
+                for (AddressBook i : list) {
+                    if(i.getName().equals(store)){
+                        list.remove(i);
+                    }
+                    break;
+                }
+            }
+        }
     //printing the contacts in the list
-        System.out.println("\nContatcs in the Address Book are: ");
-        for(int j = 0; j<list.size();j++)
-        {
-        System.out.println(list.get(j));
+        System.out.println("\nContacts in the Address Book are: ");
+        for (AddressBook addressBook : list) {
+            System.out.println(addressBook);
         }
 }
     public static void main(String[] args) {
