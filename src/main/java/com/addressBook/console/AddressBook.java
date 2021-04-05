@@ -108,8 +108,6 @@ public class AddressBook {
         for (AddressBook addressBook : list) {
             System.out.println(addressBook);
         }
-
-
         System.out.println("IF YOU WANT TO EDIT DETAILS OF THE CONTACT: PRESS 1 FOR EDITING \nPRESS 2 FOR EXIT");
         Scanner input = new Scanner(System.in);
         int in=input.nextInt();
